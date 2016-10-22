@@ -1,4 +1,5 @@
 web:
+  container_name: web_container
   build: .
   volumes:
     - "./app:/src/app"
@@ -8,4 +9,5 @@ web:
     - db
 
 db:
+  container_name: mongodb_container
   image: mongo:3.2.10

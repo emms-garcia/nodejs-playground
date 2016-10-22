@@ -1,0 +1,19 @@
+extends layout
+block content
+    h2 Todo List
+    ul.todo-list
+        if todos.length === 0
+            p Nothing to do here
+        - each todo in todos
+            li.todo-item
+                input(checked=todo.completed, id=todo._id, name="update-todo", type="checkbox")
+                span= todo.name
+                button(id=todo._id, name="delete-todo") x
+    h2 Add New Todo
+    form
+        p Name
+        input#todo-name(placeholder="Todo Name", type="text")
+        p Note
+        textarea#todo-note(placeholder="Todo Note")
+        p
+        button#create-todo Add
