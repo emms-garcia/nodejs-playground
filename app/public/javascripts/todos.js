@@ -14,28 +14,36 @@
 
     /* New Todo */
     var buttonEl = d.getElementById('create-todo');
-    buttonEl.onclick = function () {
-        request('POST', '/todos', {
-            name: d.getElementById('todo-name').value,
-            note: d.getElementById('todo-note').value,
-        });
-    };
+    if (buttonEl) {
+        buttonEl.onclick = function () {
+            var name = d.getElementById('todo-name').value;
+            var note = d.getElementById('todo-note').value;
+            name && note && request('POST', '/todos', {
+                name: name,
+                note: note,
+            });
+        };
+    }
 
     /* Update Todo */
     var checkboxEl = d.getElementsByName('update-todo');
-    for(var i = 0; i < checkboxEl.length; i++) {
-        checkboxEl[i].onchange = function (e) {
-            request('PUT', '/todos/'+e.target.id, {
-                completed: e.target.checked,
-            });
+    if (checkboxEl.length) {
+        for(var i = 0; i < checkboxEl.length; i++) {
+            checkboxEl[i].onchange = function (e) {
+                request('PUT', '/todos/'+e.target.id, {
+                    completed: e.target.checked,
+                });
+            }
         }
     }
 
     /* Delete Todo */
     var deleteEl = d.getElementsByName('delete-todo');
-    for(var i = 0; i < deleteEl.length; i++) {
-        deleteEl[i].onclick = function (e) {
-            request('DELETE', '/todos/'+e.target.id);
+    if (deleteEl.length) {
+        for(var i = 0; i < deleteEl.length; i++) {
+            deleteEl[i].onclick = function (e) {
+                request('DELETE', '/todos/'+e.target.id);
+            }
         }
     }
 
