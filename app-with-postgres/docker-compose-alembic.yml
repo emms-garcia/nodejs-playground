@@ -1,0 +1,10 @@
+version: '2'
+
+services:
+  db_alembic:
+    build:
+      context: .
+      dockerfile: Dockerfile-alembic
+    container_name: db_alembic
+    volumes:
+      - ./migrations:/code/migrations

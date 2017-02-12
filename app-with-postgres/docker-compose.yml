@@ -1,0 +1,14 @@
+version: '2'
+services:
+  web:
+    build: .
+    container_name: web_container
+    links:
+      - db
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./app:/src/app"
+  db:
+    container_name: db
+    image: postgres:latest

@@ -1,2 +1,2 @@
 # nodejs-playground
-Having fun with nodejs and express
+Having fun with nodejs.

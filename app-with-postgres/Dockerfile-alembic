@@ -1,0 +1,9 @@
+FROM python:2.7
+
+RUN mkdir -p /code/migrations
+WORKDIR /code
+
+ADD alembic.ini /code
+ADD migrations /code/migrations/
+
+RUN pip install -r migrations/requirements.txt
