@@ -1,20 +1,21 @@
 const db = require('../db');
-const Router = require('restify-router').Router;
-const routerInstance = new Router();
+const express = require('express');
 
-routerInstance.get('/products', function (req, res, next) {
+const router = express.Router();
+
+router.get('/products', function (req, res, next) {
     db.products.all(req).then(data => {
         res.json({ success: true, data });
     }).catch(error => next(error));
 });
 
-routerInstance.post('/products', function (req, res, next) {
+router.post('/products', function (req, res, next) {
     db.products.add(req.body).then(data => {
         res.json({ success: true, data });
     }).catch(error => next(error));
 });
 
-routerInstance.get('/products/:product_id', function (req, res, next) {
+router.get('/products/:product_id', function (req, res, next) {
     db.products.find(req.params.product_id).then(data => {
         if (data) {
             res.json({ success: true, data });
@@ -28,7 +29,7 @@ routerInstance.get('/products/:product_id', function (req, res, next) {
     }).catch(error => next(error));
 });
 
-routerInstance.del('/products/:product_id', function (req, res, next) {
+router.delete('/products/:product_id', function (req, res, next) {
     db.products.remove(req.params.product_id).then(data => {
         if (data) {
             res.status(204);
@@ -43,4 +44,4 @@ routerInstance.del('/products/:product_id', function (req, res, next) {
     }).catch(error => next(error));
 });
 
-module.exports = routerInstance;
+module.exports = router;

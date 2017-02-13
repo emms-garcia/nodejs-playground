@@ -1,7 +1,8 @@
-const Router = require('restify-router').Router;
+const express = require('express');
 
-const routerInstance = new Router();
-routerInstance.add('/v1', require('./products'));
-routerInstance.add('/v1', require('./users'));
+const router = express.Router();
 
-module.exports = routerInstance;
+router.use('/v1', require('./products'));
+router.use('/v1', require('./users'));
+
+module.exports = router;

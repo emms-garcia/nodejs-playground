@@ -1,20 +1,21 @@
 const db = require('../db');
-const Router = require('restify-router').Router;
-const routerInstance = new Router();
+const express = require('express');
 
-routerInstance.get('/users', function (req, res, next) {
+const router = express.Router();
+
+router.get('/users', function (req, res, next) {
     db.users.all(req).then(data => {
         res.json({ success: true, data });
     }).catch(error => next(error));
 });
 
-routerInstance.post('/users', function (req, res, next) {
+router.post('/users', function (req, res, next) {
     db.users.add(req.body.name).then(data => {
         res.json({ success: true, data });
     }).catch(error => next(error));
 });
 
-routerInstance.get('/users/:user_id', function (req, res, next) {
+router.get('/users/:user_id', function (req, res, next) {
     db.users.find(req.params.user_id).then(data => {
         if (data) {
             res.json({ success: true, data });
@@ -28,4 +29,4 @@ routerInstance.get('/users/:user_id', function (req, res, next) {
     }).catch(error => next(error));
 });
 
-module.exports = routerInstance;
+module.exports = router;
