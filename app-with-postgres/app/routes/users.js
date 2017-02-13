@@ -1,22 +1,22 @@
-const db = require('../db');
+const models = require('../models');
 const express = require('express');
 
 const router = express.Router();
 
 router.get('/users', function (req, res, next) {
-    db.users.all(req).then(data => {
+    models.Users.findAll().then(data => {
         res.json({ success: true, data });
     }).catch(error => next(error));
 });
 
 router.post('/users', function (req, res, next) {
-    db.users.add(req.body.name).then(data => {
+    models.Users.create(req.body).then(data => {
         res.json({ success: true, data });
     }).catch(error => next(error));
 });
 
 router.get('/users/:user_id', function (req, res, next) {
-    db.users.find(req.params.user_id).then(data => {
+    models.Users.findOne({ where: { id: req.params.user_id }}).then(data => {
         if (data) {
             res.json({ success: true, data });
         } else {

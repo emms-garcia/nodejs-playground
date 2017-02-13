@@ -1,22 +1,23 @@
-const db = require('../db');
 const express = require('express');
+const models = require('../models');
 
 const router = express.Router();
 
 router.get('/products', function (req, res, next) {
-    db.products.all(req).then(data => {
+    models.Products.findAll().then(data => {
         res.json({ success: true, data });
     }).catch(error => next(error));
 });
 
 router.post('/products', function (req, res, next) {
-    db.products.add(req.body).then(data => {
+    models.Products.create(req.body).then(data => {
         res.json({ success: true, data });
     }).catch(error => next(error));
 });
 
 router.get('/products/:product_id', function (req, res, next) {
-    db.products.find(req.params.product_id).then(data => {
+    console.log(req.params);
+    models.Products.findOne({ where: {id: req.params.product_id} }).then(data => {
         if (data) {
             res.json({ success: true, data });
         } else {
@@ -30,7 +31,7 @@ router.get('/products/:product_id', function (req, res, next) {
 });
 
 router.delete('/products/:product_id', function (req, res, next) {
-    db.products.remove(req.params.product_id).then(data => {
+    models.Products.destroy({ where: {id: req.params.product_id} }).then(data => {
         if (data) {
             res.status(204);
             res.json({ success: true, data });

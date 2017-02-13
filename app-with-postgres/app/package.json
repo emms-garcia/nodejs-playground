@@ -5,15 +5,16 @@
   "author": "Emmanuel Garcia <emmanuel.garcia.solis@gmail.com>",
   "private": true,
   "scripts": {
-    "start": "nodemon -L ./server.js"
+    "start": "nodemon -L ./bin/www"
   },
   "dependencies": {
     "bluebird": "^3.4.7",
     "body-parser": "~1.15.1",
-    "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "express": "^4.14.1",
     "morgan": "~1.7.0",
-    "pg-promise": "^5.5.6"
+    "pg": "^6.1.2",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^3.30.2"
   }
 }
