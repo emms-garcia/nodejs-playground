@@ -7,4 +7,4 @@ services:
       dockerfile: Dockerfile-alembic
     container_name: db_alembic
     volumes:
-      - ./migrations:/code/migrations
+      - ./migrations:/code
